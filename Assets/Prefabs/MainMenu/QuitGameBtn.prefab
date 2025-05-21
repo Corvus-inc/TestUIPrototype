@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8371653002927059491
+--- !u!1001 &3011221725341694977
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5198115402783475, guid: 5f9475feb47faeb4cb6d802f691e5bbc, type: 3}
       propertyPath: m_Name
-      value: Settings
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2546726855131792926, guid: 5f9475feb47faeb4cb6d802f691e5bbc, type: 3}
+      propertyPath: m_Type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2546726855131792926, guid: 5f9475feb47faeb4cb6d802f691e5bbc, type: 3}
       propertyPath: m_Sprite
@@ -82,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4061276286354533548, guid: 5f9475feb47faeb4cb6d802f691e5bbc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -193.75177
+      value: -412.57245
       objectReference: {fileID: 0}
     - target: {fileID: 4061276286354533548, guid: 5f9475feb47faeb4cb6d802f691e5bbc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -98,7 +102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4549902457410426497, guid: 5f9475feb47faeb4cb6d802f691e5bbc, type: 3}
       propertyPath: m_text
-      value: Settings
+      value: Quit Game
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
