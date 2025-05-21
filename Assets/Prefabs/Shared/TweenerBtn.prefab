@@ -134,12 +134,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7784f9e2070094b9369627b1afea04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScale: {x: 1, y: 1, z: 1}
+  startScale: {x: 0, y: 0, z: 0}
   overshootScale: {x: 1.25, y: 1.25, z: 1.25}
   endScale: {x: 1, y: 1, z: 1}
-  showDuration: 0.3
-  hideDuration: 0.2
-  showEase: 27
+  showDuration: 0.2
+  hideDuration: 0.1
+  overshootRatio: 0.523
+  settleRatio: 0.932
+  showEase: 15
   hideEase: 26
 --- !u!1 &9108579378366611172
 GameObject:

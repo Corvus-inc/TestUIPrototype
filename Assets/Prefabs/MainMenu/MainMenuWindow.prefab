@@ -119,6 +119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8085842295338385588}
+  - component: {fileID: 4129694024363487925}
   m_Layer: 5
   m_Name: MainMenuWindow
   m_TagString: Untagged
@@ -148,6 +149,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 1920}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4129694024363487925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3621265966824055260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4067daf6dd8c51e43bcde10a6a38ee5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startScale: {x: 0, y: 0, z: 0}
+  overshootScale: {x: 1.25, y: 1.25, z: 1.25}
+  endScale: {x: 1, y: 1, z: 1}
+  showDuration: 0.55
+  hideDuration: 0.2
+  overshootRatio: 0.6
+  settleRatio: 0.4
+  showEase: 5
+  hideEase: 26
+  buttonPrefabs:
+  - {fileID: 1472073090436116044, guid: 799faa771b4d49e4c9458339dfc54f3e, type: 3}
+  - {fileID: 5536047471097438766, guid: 2c2238ba9e6cd6f4f878a86b05474f16, type: 3}
+  - {fileID: 8375676770721540304, guid: 2b17e7003b046e04e89124ba03a8cc7a, type: 3}
+  - {fileID: 3015289267442919154, guid: 61fb1a4192cf5284cafe0ce8827c10bb, type: 3}
+  buttonContainer: {fileID: 1947833212047792939}
+  labelTweener: {fileID: 3025089259649692204}
 --- !u!1 &4444591039056112296
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,6 +188,7 @@ GameObject:
   - component: {fileID: 4261031609679338761}
   - component: {fileID: 10351495854881703}
   - component: {fileID: 6599817962595258518}
+  - component: {fileID: 3025089259649692204}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -282,3 +312,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3025089259649692204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4444591039056112296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7784f9e2070094b9369627b1afea04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startScale: {x: 0, y: 0, z: 0}
+  overshootScale: {x: 1, y: 1, z: 1}
+  endScale: {x: 1, y: 1, z: 1}
+  showDuration: 4
+  hideDuration: 0.2
+  overshootRatio: 0.6
+  settleRatio: 0.4
+  showEase: 27
+  hideEase: 26

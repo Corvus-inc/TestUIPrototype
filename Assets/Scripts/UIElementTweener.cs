@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
 
@@ -20,46 +21,68 @@ public class UIElementTweener : MonoBehaviour
     [Tooltip("Duration of hide animation in seconds")]
     [SerializeField] private float hideDuration = 0.2f;
     [Tooltip("Ease type for show animation")]
+    [Range(0f, 1f)]
+    [SerializeField] protected float overshootRatio = 0.6f;
+    [Tooltip("Portion of showDuration for settling to final scale (0 to 1)")]
+    [Range(0f, 1f)]
+    [SerializeField] protected float settleRatio = 0.4f;
+    [Tooltip("Ease type for show animation")]
     [SerializeField] private Ease showEase = Ease.OutBack;
     [Tooltip("Ease type for hide animation")]
     [SerializeField] private Ease hideEase = Ease.InBack;
 
-    protected RectTransform rectTransform;
-    private Sequence showSequence;
-    private Tweener hideTweener;
+    public event Action OnShowPeak;
+    public event Action OnShowComplete;
+    public event Action OnHideComplete;
+    
+    protected RectTransform RectTransformTweener;
+    
+    private Sequence _showSequence;
+    
+    private Tweener _overshootTweener;
+    private Tweener _settleTweener;
+    private Tweener _hideTweener;
+    
 
-    public bool IsVisible { get; private set; } = true;
+    public bool IsVisible { get; private set; }
 
     protected virtual void Awake()
     {
-        rectTransform = GetComponent<RectTransform>();
-        rectTransform.localScale = startScale;
+        RectTransformTweener = GetComponent<RectTransform>();
+        RectTransformTweener.localScale = startScale;
     }
 
     public void Show()
     {
-        showSequence?.Kill();
-        hideTweener?.Kill();
+        KillTweens();
+        RectTransformTweener.localScale = startScale;
+        IsVisible = true;
 
-        rectTransform.localScale = startScale;
+        _overshootTweener = RectTransformTweener
+            .DOScale(overshootScale, showDuration * overshootRatio)
+            .SetEase(showEase)
+            .OnComplete(() => OnShowPeak?.Invoke());
 
-        showSequence = DOTween.Sequence();
-        showSequence.Append(rectTransform
-            .DOScale(overshootScale, showDuration * 0.6f)
-            .SetEase(showEase));
-        showSequence.Append(rectTransform
-            .DOScale(endScale, showDuration * 0.4f)
-            .SetEase(showEase));
+        _settleTweener = RectTransformTweener
+            .DOScale(endScale, showDuration * settleRatio)
+            .SetEase(showEase)
+            .OnComplete(() =>
+                OnShowComplete?.Invoke());
+
+        DOTween.Sequence()
+            .Append(_overshootTweener)
+            .Append(_settleTweener);
     }
 
     public void Hide()
     {
-        showSequence?.Kill();
-        hideTweener?.Kill();
+        KillTweens();
+        IsVisible = false;
 
-        hideTweener = rectTransform
+        _hideTweener = RectTransformTweener
             .DOScale(Vector3.zero, hideDuration)
-            .SetEase(hideEase);
+            .SetEase(hideEase)
+            .OnComplete(() => OnHideComplete?.Invoke());
     }
 
     public void Toggle()
@@ -69,8 +92,22 @@ public class UIElementTweener : MonoBehaviour
             Hide();
         }
         else Show();
-        
-        IsVisible = !IsVisible;
+    }
+    
+    private void KillTweens()
+    {
+        _overshootTweener?.Kill();
+        _settleTweener?.Kill();
+        _hideTweener?.Kill();
+    }
+    
+    protected virtual void OnDestroy()
+    {
+        KillTweens();
+
+        OnShowPeak     = null;
+        OnShowComplete = null;
+        OnHideComplete = null;
     }
 }
 

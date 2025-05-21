@@ -152,6 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa612b4cc0a5144cb17e8412b5a4e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiRoot: {fileID: 505067557}
+  mainMenuPrefab: {fileID: 3621265966824055260, guid: 13e41fa4d45f2154887c1fc4b0ba40ba, type: 3}
 --- !u!4 &15099588
 Transform:
   m_ObjectHideFlags: 0

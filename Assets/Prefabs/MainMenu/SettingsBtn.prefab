@@ -116,7 +116,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5198115402783475, guid: 5f9475feb47faeb4cb6d802f691e5bbc, type: 3}
       propertyPath: m_Name
-      value: Settings
+      value: SettingsBtn
       objectReference: {fileID: 0}
     - target: {fileID: 4061276286354533548, guid: 5f9475feb47faeb4cb6d802f691e5bbc, type: 3}
       propertyPath: m_Pivot.x
