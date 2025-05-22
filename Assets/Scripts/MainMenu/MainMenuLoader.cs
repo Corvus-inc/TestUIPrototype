@@ -30,7 +30,7 @@ namespace MainMenu
         private void InitCharacterSelect()
         {
             var charModels = characters.Select(d => 
-                new CharacterModel(d, level:1, xp:100)).ToArray();
+                new CharacterModel(d, Random.Range(1,10), Random.Range(10,100))).ToArray();
             var selectorModel = new SelectorModel(charModels);
             _presenter = new CharacterSelectPresenter(_characterSelectView, selectorModel);
         }

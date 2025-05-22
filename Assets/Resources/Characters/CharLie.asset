@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75f69c1ac67cb57419e57ea8024eb5d7, type: 3}
-  m_Name: Char4
+  m_Name: CharLie
   m_EditorClassIdentifier: 
-  id: 4
-  icon: {fileID: 2050808202, guid: b2f05c7f55b3707479f408e0dfe27177, type: 3}
-  maxLevel: 9
-  baseXp: 300
+  id: 2
+  icon: {fileID: 1781417545, guid: b2f05c7f55b3707479f408e0dfe27177, type: 3}
+  maxLevel: 5
+  baseXp: 20
+  level: 1

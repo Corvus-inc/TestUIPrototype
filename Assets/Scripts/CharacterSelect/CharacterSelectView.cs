@@ -65,17 +65,13 @@ namespace CharacterSelect
             }
         }
 
-        public void SetSelectedBigIcon(Sprite icon, float v)
-        {
-            bigIcon.sprite = icon;
-        }
+        public void SetSelectedBigIcon(Sprite icon, float v) => bigIcon.sprite = icon;
+        public void SetSmallIconLevel(int i, string label) => _widgets[i].Level.text = label;
+        public void SetSmallIconName(int i, string name) => _widgets[i].Name.text = name;
         public void SetSmallIcon(int i, Sprite icon) => _widgets[i].Icon.sprite = icon;
-        public void SetProgress(int i, float v)
-        {
-            _widgets[i].ProgressBar.value = v;
-        } 
+        public void SetProgress(int i, float v) => _widgets[i].ProgressBar.value = v;
 
-        public void AnimateSwitch(int from, int to, float currentValue)
+        public void AnimateSwitch(int to, float currentValue)
         {
             var seq = DOTween.Sequence();
             seq.Append(bigIcon.DOFade(0f, .15f));

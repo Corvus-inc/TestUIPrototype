@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75f69c1ac67cb57419e57ea8024eb5d7, type: 3}
-  m_Name: Char1
+  m_Name: Fred
   m_EditorClassIdentifier: 
-  id: 1
-  icon: {fileID: -1031141221, guid: b2f05c7f55b3707479f408e0dfe27177, type: 3}
-  maxLevel: 5
-  baseXp: 60
+  id: 5
+  icon: {fileID: -1810512612, guid: b2f05c7f55b3707479f408e0dfe27177, type: 3}
+  maxLevel: 9
+  baseXp: 100
+  level: 2

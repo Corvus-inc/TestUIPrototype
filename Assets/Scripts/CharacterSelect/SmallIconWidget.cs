@@ -1,5 +1,7 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace CharacterSelect
@@ -9,10 +11,13 @@ namespace CharacterSelect
         [SerializeField]
         [Header("References")]
         Image icon;
-
+        [SerializeField] TMP_Text level;
+        [SerializeField] TMP_Text name;
         [SerializeField] Slider progressBar;
         [SerializeField] Button button;
 
+        public TMP_Text Level => level;
+        public TMP_Text Name => name;
         public Image Icon => icon;
         public Slider ProgressBar => progressBar;
         public Button Button => button;

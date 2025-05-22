@@ -17,10 +17,12 @@ namespace CharacterSelect
             _view.Build(_model.Characters.Count);
             for (int i = 0; i < _model.Characters.Count; i++)
             {
-                var cm = _model.Characters[i];
-                _view.SetSmallIcon(i, cm.Data.icon);
-                _view.SetProgress(i, cm.Xp / (float)cm.GetXpToNextLevel());
-                cm.OnXpChanged += (_, _) => RefreshProgress(i);
+                var characterModel = _model.Characters[i];
+                _view.SetSmallIcon(i, characterModel.Data.icon);
+                _view.SetSmallIconLevel(i, characterModel.Data.level.ToString());
+                _view.SetSmallIconName(i, characterModel.Data.name);
+                _view.SetProgress(i, characterModel.Xp / (float)characterModel.GetXpToNextLevel());
+                characterModel.OnXpChanged += (_, _) => RefreshProgress(i);
             }
             RefreshSelection(0, instant:true);
 
@@ -43,7 +45,7 @@ namespace CharacterSelect
             var cm = _model.Characters[newIndex];
             var currentValue = cm.Xp / (float)cm.GetXpToNextLevel();
             if (instant) _view.SetSelectedBigIcon(sprite, currentValue);
-            else _view.AnimateSwitch(_model.SelectedIndex, newIndex, currentValue);
+            else _view.AnimateSwitch(newIndex, currentValue);
             _view.SetSelectedBigIcon(sprite, currentValue);
         }
 

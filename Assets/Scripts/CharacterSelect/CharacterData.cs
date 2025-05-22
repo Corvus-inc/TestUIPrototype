@@ -9,5 +9,6 @@ namespace CharacterSelect
         public Sprite icon;
         public int maxLevel;
         public int baseXp;
+        public int level;
     }
 }
