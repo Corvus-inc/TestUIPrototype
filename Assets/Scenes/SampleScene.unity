@@ -170,6 +170,10 @@ MonoBehaviour:
   uiRoot: {fileID: 505067557}
   mainMenuPrefab: {fileID: 3621265966824055260, guid: 13e41fa4d45f2154887c1fc4b0ba40ba, type: 3}
   characterSelectPrefab: {fileID: 5791047896098060751, guid: da3f10fe5c762b34b8af53f67b88d959, type: 3}
+  characters:
+  - {fileID: 11400000, guid: 4512707cdc28a40459b9bbf66f1b5a5d, type: 2}
+  - {fileID: 11400000, guid: d997a87a5d39d6b4982f7e5726ee76a3, type: 2}
+  - {fileID: 11400000, guid: 3d4b88f26463f5f45adfd76c1784374c, type: 2}
 --- !u!1 &100617023
 GameObject:
   m_ObjectHideFlags: 0

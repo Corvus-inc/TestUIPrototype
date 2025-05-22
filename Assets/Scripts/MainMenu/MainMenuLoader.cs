@@ -1,3 +1,4 @@
+using System.Linq;
 using CharacterSelect;
 using UnityEngine;
 
@@ -8,23 +9,36 @@ namespace MainMenu
         [SerializeField] private Transform uiRoot;
         [SerializeField] private GameObject mainMenuPrefab;
         [SerializeField] private GameObject characterSelectPrefab;
+        [SerializeField] CharacterData[] characters;
 
         private MainMenu _mainMenu;
         private CharacterSelectView _characterSelectView;
+        CharacterSelectPresenter _presenter;
         private MainMenuNavigator _navigator;
 
         private void Awake()
         {
             _mainMenu = Instantiate(mainMenuPrefab, uiRoot).GetComponent<MainMenu>();
+            
             _characterSelectView = Instantiate(characterSelectPrefab, uiRoot).GetComponent<CharacterSelectView>();
             _characterSelectView.gameObject.SetActive(false);
-
+            InitCharacterSelect();
+            
             _navigator = new MainMenuNavigator(_mainMenu, _characterSelectView);
+        }
+
+        private void InitCharacterSelect()
+        {
+            var charModels = characters.Select(d => 
+                new CharacterModel(d, level:1, xp:0)).ToArray();
+            var selectorModel = new SelectorModel(charModels);
+            _presenter = new CharacterSelectPresenter(_characterSelectView, selectorModel);
         }
 
         private void OnDestroy()
         {
             _navigator?.Dispose();
+            _presenter?.Dispose();
 
             if (_mainMenu != null) Destroy(_mainMenu.gameObject);
             if (_characterSelectView != null) Destroy(_characterSelectView.gameObject);

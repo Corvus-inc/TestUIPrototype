@@ -19,7 +19,7 @@ namespace MainMenu
             _mainMenu.OnCharacterSelectClick += HandleCharacterSelectClicked;
             _mainMenu.OnQuitClick += HandleQuitClicked;
 
-            _characterSelectView.OnBackClick += HandleBackCharacterSelectView;
+            _characterSelectView.OnBackClicked += HandleBackCharacterSelectView;
         }
 
         private void HandleCharacterSelectClicked()
@@ -63,7 +63,7 @@ namespace MainMenu
             _mainMenu.OnCharacterSelectClick -= HandleCharacterSelectClicked;
             _mainMenu.OnQuitClick -= HandleQuitClicked;
 
-            _characterSelectView.OnBackClick -= HandleBackCharacterSelectView;
+            _characterSelectView.OnBackClicked -= HandleBackCharacterSelectView;
         }
     }
 }
