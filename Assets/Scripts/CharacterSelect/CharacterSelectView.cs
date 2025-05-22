@@ -15,8 +15,8 @@ namespace CharacterSelect
         [SerializeField] private GameObject smallIconPrefab; 
     
         public event Action<int> OnCharacterButtonClicked = delegate { };
-        public event Action OnBackClicked = delegate { };   
-        readonly List<SmallIconWidget> _widgets = new();
+        public event Action OnBackClicked = delegate { };
+        private readonly List<SmallIconWidget> _widgets = new();
         
         private void Awake()
         {

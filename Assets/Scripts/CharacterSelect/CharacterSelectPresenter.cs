@@ -1,5 +1,4 @@
 using System;
-using MainMenu;
 
 namespace CharacterSelect
 {
@@ -24,28 +23,23 @@ namespace CharacterSelect
                 _view.SetProgress(i, characterModel.Xp / (float)characterModel.GetXpToNextLevel());
                 characterModel.OnXpChanged += (_, _) => RefreshProgress(i);
             }
-            RefreshSelection(0, instant:true);
+            RefreshSelection(0);
 
             // subscribe UI events
             _view.OnCharacterButtonClicked += OnUiSelect;
             _view.OnBackClicked            += HandleBack;
-            _model.OnSelectedChanged       += modelIndex => RefreshSelection(modelIndex, instant:false);
+            _model.OnSelectedChanged       += modelIndex => RefreshSelection(modelIndex);
         }
 
         void OnUiSelect(int idx) => _model.Select(idx);
-
-        void RefreshSelection(int newIndex)
-        {
-            RefreshSelection(newIndex, false);
-        }
         
-        void RefreshSelection(int newIndex, bool instant)
+        void RefreshSelection(int newIndex)
         {
             var sprite = _model.Characters[newIndex].Data.icon;
             var cm = _model.Characters[newIndex];
             var currentValue = cm.Xp / (float)cm.GetXpToNextLevel();
-            if (instant) _view.SetSelectedBigIcon(sprite, currentValue);
-            else _view.AnimateSwitch(newIndex, currentValue);
+            
+            _view.AnimateSwitch(newIndex, currentValue);
             _view.SetSelectedBigIcon(sprite, currentValue);
         }
 
