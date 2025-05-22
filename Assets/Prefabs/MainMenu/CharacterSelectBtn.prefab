@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5198115402783475, guid: 5f9475feb47faeb4cb6d802f691e5bbc, type: 3}
       propertyPath: m_Name
-      value: CharacterSelect
+      value: CharacterSelectBtn
       objectReference: {fileID: 0}
     - target: {fileID: 2546726855131792926, guid: 5f9475feb47faeb4cb6d802f691e5bbc, type: 3}
       propertyPath: m_Sprite
@@ -103,5 +103,27 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5198115402783475, guid: 5f9475feb47faeb4cb6d802f691e5bbc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4707079341366579760}
   m_SourcePrefab: {fileID: 100100000, guid: 5f9475feb47faeb4cb6d802f691e5bbc, type: 3}
+--- !u!1 &5536047471097438766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5198115402783475, guid: 5f9475feb47faeb4cb6d802f691e5bbc, type: 3}
+  m_PrefabInstance: {fileID: 5530854097338759389}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-4707079341366579760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5536047471097438766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21dba8108639435fb36dadd5e7389363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonType: 2
+  button: {fileID: 0}

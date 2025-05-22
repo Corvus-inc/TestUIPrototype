@@ -9,67 +9,77 @@ using UnityEditor;
 [RequireComponent(typeof(RectTransform))]
 public class UIElementTweener : MonoBehaviour
 {
+    [SerializeField]
     [Header("Animation Settings")]
     [Tooltip("Start scale when showing")]
-    [SerializeField] private Vector3 startScale = Vector3.one * 1f;
+    private Vector3 startScale = Vector3.one * 0f;
+
+    [SerializeField]
     [Tooltip("Overshoot scale")]
-    [SerializeField] private Vector3 overshootScale = Vector3.one * 1.25f;
-    [Tooltip("End scale after showing")]
-    [SerializeField] private Vector3 endScale = Vector3.one;
+    private Vector3 overshootScale = Vector3.one * 1.25f;
+
+    [SerializeField]
+    [Tooltip("End scale after showing")] 
+    private Vector3 endScale = Vector3.one;
+
+    [SerializeField]
     [Tooltip("Duration of show animation in seconds")]
-    [SerializeField] private float showDuration = 0.3f;
+    private float showDuration = 0.3f;
+
+    [SerializeField]
     [Tooltip("Duration of hide animation in seconds")]
-    [SerializeField] private float hideDuration = 0.2f;
-    [Tooltip("Ease type for show animation")]
+    private float hideDuration = 0.2f;
+
+    [SerializeField]
     [Range(0f, 1f)]
-    [SerializeField] protected float overshootRatio = 0.6f;
+    [Tooltip("Ease type for show animation")]
+    protected float overshootRatio = 0.6f;
+
+    [SerializeField]
+    [Range(0f, 1f)]
     [Tooltip("Portion of showDuration for settling to final scale (0 to 1)")]
-    [Range(0f, 1f)]
-    [SerializeField] protected float settleRatio = 0.4f;
+    protected float settleRatio = 0.4f;
+
+    [SerializeField]
     [Tooltip("Ease type for show animation")]
-    [SerializeField] private Ease showEase = Ease.OutBack;
+    private Ease showEase = Ease.OutBack;
+
+    [SerializeField]
     [Tooltip("Ease type for hide animation")]
-    [SerializeField] private Ease hideEase = Ease.InBack;
+    private Ease hideEase = Ease.InBack;
 
     public event Action OnShowPeak;
     public event Action OnShowComplete;
     public event Action OnHideComplete;
-    
-    protected RectTransform RectTransformTweener;
-    
+
     private Sequence _showSequence;
-    
+
     private Tweener _overshootTweener;
     private Tweener _settleTweener;
     private Tweener _hideTweener;
-    
+
 
     public bool IsVisible { get; private set; }
 
-    protected virtual void Awake()
-    {
-        RectTransformTweener = GetComponent<RectTransform>();
-        RectTransformTweener.localScale = startScale;
-    }
-
     public void Show()
     {
+        Debug.Log($"Show {gameObject.name}");
         KillTweens();
-        RectTransformTweener.localScale = startScale;
+        transform.localScale = startScale;
         IsVisible = true;
 
-        _overshootTweener = RectTransformTweener
+        _overshootTweener = transform
             .DOScale(overshootScale, showDuration * overshootRatio)
             .SetEase(showEase)
             .OnComplete(() => OnShowPeak?.Invoke());
 
-        _settleTweener = RectTransformTweener
+        _settleTweener = transform
             .DOScale(endScale, showDuration * settleRatio)
             .SetEase(showEase)
             .OnComplete(() =>
                 OnShowComplete?.Invoke());
 
-        DOTween.Sequence()
+        _showSequence = DOTween.Sequence()
             .Append(_overshootTweener)
             .Append(_settleTweener);
     }
@@ -79,7 +89,7 @@ public class UIElementTweener : MonoBehaviour
         KillTweens();
         IsVisible = false;
 
-        _hideTweener = RectTransformTweener
+        _hideTweener = transform
             .DOScale(Vector3.zero, hideDuration)
             .SetEase(hideEase)
             .OnComplete(() => OnHideComplete?.Invoke());
@@ -93,21 +103,20 @@ public class UIElementTweener : MonoBehaviour
         }
         else Show();
     }
-    
+
     private void KillTweens()
     {
-        _overshootTweener?.Kill();
-        _settleTweener?.Kill();
-        _hideTweener?.Kill();
+        if (_showSequence?.IsActive() == true) _showSequence.Kill();
+        if (_hideTweener?.IsActive() == true) _hideTweener.Kill();
+
+        _showSequence = null;
+        _hideTweener = null;
     }
-    
+
     protected virtual void OnDestroy()
     {
         KillTweens();
-
-        OnShowPeak     = null;
-        OnShowComplete = null;
-        OnHideComplete = null;
+        OnShowPeak = OnShowComplete = OnHideComplete = null;
     }
 }
 
@@ -120,6 +129,7 @@ public class UIElementTweenerEditor : Editor
         DrawDefaultInspector();
         UIElementTweener tweener = (UIElementTweener)target;
         EditorGUILayout.Space();
+
         // Show toggle button only in play mode for runtime debugging
         if (Application.isPlaying)
         {
