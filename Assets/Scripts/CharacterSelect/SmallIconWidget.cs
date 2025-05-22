@@ -6,27 +6,25 @@ namespace CharacterSelect
 {
     public sealed class SmallIconWidget : MonoBehaviour
     {
+        [SerializeField]
         [Header("References")]
-        [SerializeField] Image   icon;
-        [SerializeField] Slider  progressBar;
-        [SerializeField] Button  button;
+        Image icon;
 
-        // Свойства-геттеры, чтобы
-        // внешний код не держал прямые ссылки на компоненты.
-        public Image  Icon        => icon;
+        [SerializeField] Slider progressBar;
+        [SerializeField] Button button;
+
+        public Image Icon => icon;
         public Slider ProgressBar => progressBar;
-        public Button Button      => button;
+        public Button Button => button;
 
         void Awake()
         {
-            // По желанию — лёгкая анимация нажатия
             button.onClick.AddListener(PlayClickAnimation);
         }
 
         void PlayClickAnimation()
         {
-            // "Пружинка" на иконке
-            icon.transform.DOKill();                        // сбрасываем анимацию, если шла
+            icon.transform.DOKill();
             icon.transform.localScale = Vector3.one;
             icon.transform
                 .DOPunchScale(Vector3.one * 0.15f, 0.2f, 8, 0.8f);

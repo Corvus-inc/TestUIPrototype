@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Char1
   m_EditorClassIdentifier: 
   id: 1
-  icon: {fileID: -26798996, guid: 93ce79f4af29cbf42ababd8682a4185b, type: 3}
+  icon: {fileID: -1031141221, guid: b2f05c7f55b3707479f408e0dfe27177, type: 3}
   maxLevel: 5
-  baseXp: 10
+  baseXp: 60

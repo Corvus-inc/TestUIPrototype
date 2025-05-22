@@ -9,11 +9,11 @@ namespace MainMenu
         [SerializeField] private Transform uiRoot;
         [SerializeField] private GameObject mainMenuPrefab;
         [SerializeField] private GameObject characterSelectPrefab;
-        [SerializeField] CharacterData[] characters;
+        [SerializeField] private CharacterData[] characters;
 
         private MainMenu _mainMenu;
         private CharacterSelectView _characterSelectView;
-        CharacterSelectPresenter _presenter;
+        private CharacterSelectPresenter _presenter;
         private MainMenuNavigator _navigator;
 
         private void Awake()
@@ -30,7 +30,7 @@ namespace MainMenu
         private void InitCharacterSelect()
         {
             var charModels = characters.Select(d => 
-                new CharacterModel(d, level:1, xp:0)).ToArray();
+                new CharacterModel(d, level:1, xp:100)).ToArray();
             var selectorModel = new SelectorModel(charModels);
             _presenter = new CharacterSelectPresenter(_characterSelectView, selectorModel);
         }

@@ -5,8 +5,8 @@ namespace CharacterSelect
 {
     public sealed class CharacterSelectPresenter : IDisposable
     {
-        readonly ICharacterSelectView _view;
-        readonly ISelectorModel       _model;
+        private readonly ICharacterSelectView _view;
+        private readonly ISelectorModel _model;
 
         public CharacterSelectPresenter(ICharacterSelectView view, ISelectorModel model)
         {
@@ -40,9 +40,11 @@ namespace CharacterSelect
         void RefreshSelection(int newIndex, bool instant)
         {
             var sprite = _model.Characters[newIndex].Data.icon;
-            if (instant) _view.SetSelectedBigIcon(sprite);
-            else _view.AnimateSwitch(_model.SelectedIndex, newIndex);
-            _view.SetSelectedBigIcon(sprite);
+            var cm = _model.Characters[newIndex];
+            var currentValue = cm.Xp / (float)cm.GetXpToNextLevel();
+            if (instant) _view.SetSelectedBigIcon(sprite, currentValue);
+            else _view.AnimateSwitch(_model.SelectedIndex, newIndex, currentValue);
+            _view.SetSelectedBigIcon(sprite, currentValue);
         }
 
         void RefreshProgress(int idx)

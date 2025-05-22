@@ -10,6 +10,7 @@ namespace CharacterSelect
     {
         [SerializeField] private Button backButton;
         [SerializeField] private Image bigIcon;
+        [SerializeField] private Slider bigIconSlider;
         [SerializeField] private Transform smallIconsParent;
         [SerializeField] private GameObject smallIconPrefab; 
     
@@ -64,19 +65,28 @@ namespace CharacterSelect
             }
         }
 
-        public void SetSelectedBigIcon(Sprite icon) => bigIcon.sprite = icon;
-        public void SetSmallIcon(int i, Sprite icon) => _widgets[i].Icon.sprite = icon;
-        public void SetProgress(int i, float v) => _widgets[i].ProgressBar.value = v;
-
-        public void AnimateSwitch(int from, int to)
+        public void SetSelectedBigIcon(Sprite icon, float v)
         {
-            // DOTween для плавного fade-scale
+            bigIcon.sprite = icon;
+        }
+        public void SetSmallIcon(int i, Sprite icon) => _widgets[i].Icon.sprite = icon;
+        public void SetProgress(int i, float v)
+        {
+            _widgets[i].ProgressBar.value = v;
+        } 
+
+        public void AnimateSwitch(int from, int to, float currentValue)
+        {
             var seq = DOTween.Sequence();
             seq.Append(bigIcon.DOFade(0f, .15f));
             seq.Join(bigIcon.transform.DOScale(.8f, .15f));
             seq.AppendCallback(() => bigIcon.sprite = _widgets[to].Icon.sprite);
             seq.Append(bigIcon.DOFade(1f, .15f));
             seq.Join(bigIcon.transform.DOScale(1f, .15f));
+            seq.AppendCallback(() => bigIconSlider.value = bigIconSlider.minValue);
+            seq.Append(bigIconSlider
+                    .DOValue(currentValue, .30f)
+                    .SetEase(Ease.Linear));
         }
     }
 }
